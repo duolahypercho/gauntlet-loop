@@ -1,0 +1,19 @@
+---
+description: Run a Gauntlet Loop — fan-out builders, harsh separate critic, blind A/B against an unreachable reference, keep improving until the human stops it
+argument-hint: "[what to build] [optional: against REFERENCE] [optional: in STACK]"
+---
+
+Invoke the **gauntlet-loop** skill and **run it internally**. Do not dump a prompt for the user to paste.
+
+Follow `~/.claude/skills/gauntlet-loop/SKILL.md` → `AGENTS.md` → `CLAUDE.md` exactly:
+
+1. Infer nouns from the args below (thing / reference / stack / budget). One clarifying question max if THING is missing, then start.
+2. Print the one-line status + the "you are the brake" honesty line.
+3. Write a short contract file.
+4. Fan out builders; capture artifacts; spawn a fresh harsh critic with no builder memory.
+5. Blind A/B against the real reference; turn defects into the next round; keep looping under `/loop` + ultracode posture.
+6. Stop only when the human stops you or the budget hits.
+
+Do not soften the critic. Do not lower the reference so the loop can "finish." Do not invent a stop condition.
+
+Task: $ARGUMENTS
