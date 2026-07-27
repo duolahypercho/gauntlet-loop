@@ -20,7 +20,14 @@ Three jobs, one invoke:
 
 The bar is deliberately unreachable. Quality is a function of runtime. **You are the brake.**
 
-Source pattern: Matt Shumer's 152-word Call of Duty prompt — the one that one-shotted a browser FPS and kept climbing because its own critics never picked its frame over the real game.
+## Credit
+
+Built on **[Matt Shumer](https://x.com/mattshumer_)** (`@mattshumer_`) cooking the 152-word Call of Duty prompt — the one that one-shotted a browser FPS and kept climbing because its own critics never picked its frame over the real game.
+
+- **Original prompt + demo repo:** [github.com/mshumer/Claude-of-Duty](https://github.com/mshumer/Claude-of-Duty)
+- **This skill:** turns that loop into `/gauntlet-loop` (Claude) / `$gauntlet-loop` (Codex) so you don't have to babysit the paste
+
+He cooked the aim. This just makes the machine that keeps aiming.
 
 ## Install
 
