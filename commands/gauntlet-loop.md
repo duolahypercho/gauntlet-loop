@@ -11,9 +11,10 @@ Follow `~/.claude/skills/gauntlet-loop/SKILL.md` → `AGENTS.md` → `CLAUDE.md`
 2. Print the one-line status + the "you are the brake" honesty line.
 3. Write a short contract file.
 4. Fan out builders; capture artifacts; spawn a fresh harsh critic with no builder memory.
-5. Blind A/B against the real reference; turn defects into the next round; keep looping under `/loop` + ultracode posture.
-6. Stop only when the human stops you or the budget hits.
+5. Blind A/B against the real reference; turn defects into the next round; **immediately start the next round in the same turn** under `/loop` + ultracode posture.
+6. Stop only when the human stops you or the budget hits. Never ask "want me to continue?"
 
 Do not soften the critic. Do not lower the reference so the loop can "finish." Do not invent a stop condition.
+**Do not end the turn after one fan-out → critic cycle.** That is the #1 failure mode. See AGENTS.md §7 Continuation contract. Write `GAUNTLET_STATE.md` every round; bare re-invoke resumes.
 
 Task: $ARGUMENTS

@@ -105,17 +105,56 @@ Critic must answer: which is better, why, how big the gap.
 
 Expected default: reference wins. That is success of the *mechanism*, not failure of the run.
 
-### 6. Defect list → next round
+### 6. Defect list → next round (mandatory, same turn)
 
-Turn critic output into a concrete defect list. Feed it to the owning workers. Go to step 2.
+Turn critic output into a concrete defect list. Update `GAUNTLET_STATE.md`. **Immediately** feed defects to owning workers and go to step 2.
 
 Never treat "reference won" as stop. Never treat a local score bump as done.
+**Completing one fan-out → critic → A/B cycle is not done.** It is the middle of the loop.
 
-### 7. Budget / human stop
+### 7. Continuation contract (hard — this is why agents stop early)
 
-- If user says stop / enough / ship: stop, present best build + remaining gap.
-- If `BUDGET` hit: stop the same way.
-- Otherwise: keep looping.
+Agents default to ending the turn after one useful cycle. That default is **forbidden** here.
+
+After every critic round you MUST, **in the same turn, without waiting for the user**:
+
+1. Write/update `GAUNTLET_STATE.md`:
+   ```text
+   round: N
+   reference: …
+   stack: …
+   last_ab_winner: reference|candidate
+   defects: …
+   next: continue
+   ```
+2. Start round `N+1` immediately (builders → capture → critic → A/B).
+3. Restate last (error correction): *"Gauntlet continues. Human is the brake."*
+
+**Illegal end-of-turn moves** (do not do these):
+
+- "Round 1 complete — want me to keep going?"
+- "Solid foundation / good progress / ready for review"
+- Pasting a summary and yielding control after one cycle
+- Treating blind-A/B failure as a reason to stop (it is the reason to continue)
+- Stopping because the build "works" or "looks good"
+
+**Only legal reasons to end the turn:**
+
+| Reason | What to do |
+|---|---|
+| User said stop / enough / ship | Present best build + remaining gap |
+| Stated `BUDGET` hit | Same |
+| Hard block needing a human (missing API key, permission, empty disk) | Ask once, then wait |
+
+If you catch yourself about to summarize and stop: that is a bug in your behavior. Start the next round instead.
+
+### 8. If the harness forces a turn boundary
+
+Some hosts cut you off between tool batches. Before yielding:
+
+1. Ensure `GAUNTLET_STATE.md` says `next: continue`
+2. Arm an automatic wake if the host supports it (see harness overlay)
+3. On wake: read `GAUNTLET_STATE.md` and resume at step 2 — **do not ask permission**
 
 ## Anti-patterns
 
@@ -126,6 +165,7 @@ Never treat "reference won" as stop. Never treat a local score bump as done.
 - Convergence rules ("stop after 2 flat rounds")
 - Long management specs / skill packs bolted onto this run
 - Declaring victory because a subsystem "looks solid"
+- **Stopping after one round and asking whether to continue**
 
 ## Compose-only escape hatch
 

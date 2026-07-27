@@ -60,6 +60,7 @@ If still empty, ask once: "What are we building?" Then go.
 - Mix harness verbs (`/loop` on Codex, `/goal` on Claude, `ultracode` on Codex)
 - Invent a stop condition; the human + budget is the brake
 - Soften the critic or lower the reference so the loop can "finish"
+- **End the turn after one fan-out → critic cycle** — that is the #1 failure mode. Start the next round in the same turn. See AGENTS.md §7 Continuation contract.
 
 ## Additional resources
 
