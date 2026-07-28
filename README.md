@@ -1,6 +1,6 @@
 # Gauntlet Loop
 
-**Matt Shumer's aim prompt as a slash command.** Fill the three paragraphs. Run them. Stop when *you* stop it.
+**GAME skill.** Matt Shumer's aim prompt as a slash command — build a game against a named reference. Fill the three paragraphs. Run them. Stop when *you* stop it.
 
 No harness. No state machine. No helper scripts. Pure prompt.
 
@@ -72,7 +72,8 @@ gauntlet-loop/
     ├── AGENTS.md     # the prompt + what not to invent
     ├── CLAUDE.md     # /loop + ultracode
     ├── CODEX.md      # /goal
-    ├── examples.md   # filled prompts
+    ├── examples.md    # filled game prompts
+    ├── ASSETS.md      # image gen vs Blender
     └── BLENDER_MCP.md # Blender MCP setup + use
 ```
 

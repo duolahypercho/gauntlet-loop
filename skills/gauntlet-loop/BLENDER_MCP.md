@@ -2,9 +2,11 @@
 
 [ahujasid/blender-mcp](https://github.com/ahujasid/blender-mcp) lets an agent drive a **live Blender** session (create/edit objects, materials, run `bpy` code, pull Poly Haven / Sketchfab assets).
 
-Use this when the Gauntlet (or any build) needs real 3D assets — not a capture farm inside the game engine.
+**Gauntlet Loop is a game skill.** Use Blender when the **game** needs real 3D meshes (weapons, props, kits, GLB/FBX) — not for 2D sprites (use image gen) and not as a capture farm inside the game engine.
 
-← [SKILL.md](SKILL.md) · [AGENTS.md](AGENTS.md)
+When to pick Blender vs image gen: [ASSETS.md](ASSETS.md).
+
+← [SKILL.md](SKILL.md) · [AGENTS.md](AGENTS.md) · [ASSETS.md](ASSETS.md)
 
 ## Architecture (two pieces)
 
@@ -98,9 +100,10 @@ Once connected, ask in natural language. Typical tool surface:
 
 ### Gauntlet posture
 
-- Blender MCP is for **making the product look better** (real meshes, lighting refs, exports into the game/site)
-- Do **not** turn it into another harness workstream (no endless capture scoreboards)
-- Export assets into the project; keep the game/runtime playable
+- Blender MCP is for **making the game look better** (real meshes, lighting refs, exports into ThreeJS/Godot/…)
+- Prefer image gen for flat sprites/textures — see [ASSETS.md](ASSETS.md)
+- Do **not** turn Blender into another harness workstream (no endless capture scoreboards)
+- Export into the game project; prove the asset in a **playable in-game frame**
 - One Blender GUI session + one MCP client at a time
 
 ### Credentials (optional)
