@@ -39,3 +39,11 @@ framework around it. The prompt *is* the method.
 - Lag the product out with capture farms / headless engine spam — the game stays playable
 
 Fills: [examples.md](examples.md)
+
+## Blender MCP (optional, for real 3D)
+
+When the build needs real meshes / lighting / GLB exports, use Blender MCP — not a game-engine capture farm.
+
+- Setup + use: [BLENDER_MCP.md](BLENDER_MCP.md)
+- Flow: Blender GUI → sidebar **BlenderMCP** → **Connect to Claude** → agent uses MCP tools
+- Export into the product; keep runtime playable

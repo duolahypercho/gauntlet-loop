@@ -72,6 +72,10 @@ These are how agents leave the pure prompt and break the loop:
 
 Glance at a frame the cheap way (one light screenshot / export — not a capture farm). Fix the product. Compare blind to the real reference. Repeat.
 
+## Blender MCP (optional)
+
+For real 3D assets (meshes, lights, GLB into the product), see [BLENDER_MCP.md](BLENDER_MCP.md). Connect Blender's **BlenderMCP** sidebar first, then use MCP tools. Still pure-prompt posture: assets serve the product; do not invent a Blender capture harness.
+
 ## Compose-only
 
 Only if the user says "just give me the prompt" / "compose only": return the filled three paragraphs in a fenced `text` block. Otherwise always execute.

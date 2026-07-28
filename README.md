@@ -72,7 +72,8 @@ gauntlet-loop/
     ├── AGENTS.md     # the prompt + what not to invent
     ├── CLAUDE.md     # /loop + ultracode
     ├── CODEX.md      # /goal
-    └── examples.md   # filled prompts
+    ├── examples.md   # filled prompts
+    └── BLENDER_MCP.md # Blender MCP setup + use
 ```
 
 ## License
