@@ -32,6 +32,32 @@ Use image generation (Cursor `GenerateImage`, fal, Midjourney, etc.) when the ga
 - Prefer sheets the engine can atlas; avoid one-off PNGs that never get imported
 - Image gen is wrong for anything that must rotate, deform, or read as solid geometry under a moving camera
 
+## 2D games (Brotato / Hades-likes): characters & monsters via image gen
+
+For top-down / side-view **sprite** games, hero and enemies use **image gen**, not Blender and not procedural blob generators (`PIL` / `artgen`-style ovals). Goal: **2D game art**, not “a generated picture pasted in.”
+
+### Do it as a sprite factory
+
+1. **Style lock (one page)** from the reference game’s craft — outline weight, soft shade, highlight, camera angle, fist-scale. Copy the *craft*, not the IP (don’t clone their exact mascot).
+2. **Hero first** — one isolated character on **transparent PNG**, no ground, no UI, no text. Gate: next to a reference still, does it feel like the same sport?
+3. **Batch from that lock** — same prompt block for enemy families, then held weapons / hotbar icons. Reject background scrape, photo noise, or a new outline language.
+4. **Drop-in replace** existing `assets/art/characters|enemies|weapons/*.png` (or project equivalent). Stop any code sprite generator from overwriting them.
+5. **Prove in-game** — light wave/arena frame. Critic grades the **game**, not the Midjourney grid.
+
+### Prompt constraints (every character / monster sheet)
+
+- single subject, transparent background  
+- game sprite / faux-2.5D illustration — not photoreal, not UI mock, not full scene  
+- match locked outline + shade; readable at thumbnail in chaos  
+- same scale language as hotbar / held props  
+
+### Anti-patterns (this is why builds look “sus”)
+
+- Generating full arena screenshots as “character art” → reads as an image, not a sprite world  
+- Mixing PIL ovals + AI icons + glitch enemies → two games in one frame  
+- New style every batch  
+- Approving the gen grid while the in-game frame still clashes  
+
 ## When to use **Blender MCP**
 
 Use Blender ([BLENDER_MCP.md](BLENDER_MCP.md)) when the game needs **real 3D**:

@@ -77,9 +77,10 @@ That is all. No other protocol.
 
 ## Art routing (short)
 
-Full chooser: [ASSETS.md](ASSETS.md).
+Full chooser + 2D sprite factory: [ASSETS.md](ASSETS.md).
 
 - **Image gen** → sprites, textures, UI pixels, concepts → import into the game
+- **2D hero/monsters** (Brotato-like) → image-gen sprite factory (style lock → hero → enemies → weapons → replace PNGs). Not Blender. Not procedural blob generators.
 - **Blender MCP** → real 3D meshes / GLB/FBX → import into the game ([BLENDER_MCP.md](BLENDER_MCP.md))
 - Critic grades **in-game frames** against the real reference game — never the Midjourney grid or Blender viewport alone
 

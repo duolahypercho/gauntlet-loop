@@ -37,9 +37,10 @@ it. The prompt *is* the method.
 | Need | Tool | Doc |
 |---|---|---|
 | Sprites, textures, UI pixels, concepts | **Image gen** | [ASSETS.md](ASSETS.md) |
+| 2D hero/monsters (Brotato-like) | **Image gen sprite factory** (style lock → hero → batch → import) | [ASSETS.md](ASSETS.md) |
 | Real meshes, GLB/FBX, 3D props/weapons | **Blender MCP** | [BLENDER_MCP.md](BLENDER_MCP.md) + [ASSETS.md](ASSETS.md) |
 
-Critic grades **in-game frames** vs the real reference game. Art tools only close asset gaps — then wire into the playable build.
+Critic grades **in-game frames** vs the real reference game. Art tools only close asset gaps — then wire into the playable build. For 2D sprite games, characters/monsters are image-gen sprites with one locked art language — not Blender, not procedural ovals.
 
 ## Do not
 
