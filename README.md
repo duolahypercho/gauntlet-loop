@@ -65,13 +65,15 @@ Or just say "Gauntlet Loop …" in natural language.
 
 On invoke the agent:
 
-1. Infers nouns (thing / reference / stack / budget) — one clarifying question max
-2. Writes a short contract (`ARCHITECTURE.md` / `GAUNTLET.md`)
-3. Fans out builders, captures artifacts (frames / screenshots)
+1. Infers nouns (thing / reference / stack / budget / hard panel) — one clarifying question max
+2. Writes a short contract (`ARCHITECTURE.md` / `GAUNTLET.md`) — **product subsystems only**
+3. Fans out **product** builders; grabs the cheapest glanceable frames
 4. Spawns a **fresh** harsh critic with no builder memory
-5. Runs blind A/B against the real reference
-6. Turns defects into the next round
+5. Runs **matched** blind A/B against the real reference (hard panel owns the tally)
+6. Turns **product** defects into the next round
 7. Keeps going until you stop it or the budget hits
+
+**The loop body is always the product.** Capture is disposable. The skill forbids promoting capture/eval tooling into a workstream — that is how long runs leave the pure prompt and start optimizing harness FPS instead of the game.
 
 Say **"compose only"** if you just want the filled three-paragraph prompt without the run.
 
@@ -97,9 +99,12 @@ gauntlet-loop/
 
 - Name quality; never describe it
 - Separate harsh critic; builder never self-grades
-- Blind forced choice against a real reference
+- Blind forced choice against a real reference (matched sheets only)
+- Hard panel owns the tally — easy checklist wins do not flip `candidate`
 - Unreachable bar stays unreachable (no "stop after N flat rounds")
 - Human + budget is the only stop
+- Product is the loop body — never a capture/harness workstream
+- One fan-out → critic cycle is never "done"; continue in the same turn
 
 ## License
 

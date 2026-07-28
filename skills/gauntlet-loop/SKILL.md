@@ -20,6 +20,10 @@ critic, blind A/B against the reference, and keep looping until the human stops
 you or the budget hits. The three-paragraph prompt is your internal operating
 procedure — not something you ask them to run.
 
+**The loop body is always the product.** Capture is disposable. Never promote
+harness/eval tooling into a workstream. Hard panel owns the A/B tally. See
+AGENTS.md ("Why the pure prompt works").
+
 Works on **Claude Code** and **Codex**, same split as vault `AGENTS.md` + `CLAUDE.md`.
 
 ## Boot sequence (do this first, then start)
@@ -61,6 +65,8 @@ If still empty, ask once: "What are we building?" Then go.
 - Invent a stop condition; the human + budget is the brake
 - Soften the critic or lower the reference so the loop can "finish"
 - **End the turn after one fan-out → critic cycle** — that is the #1 failure mode. Start the next round in the same turn. See AGENTS.md §7 Continuation contract.
+- **Spend rounds on capture/harness instead of the product** — that is the #2 failure mode. See AGENTS.md §3 + core rules 10–14.
+- Flip `last_ab_winner` to candidate from easy-panel majority or mismatched sheets
 
 ## Additional resources
 

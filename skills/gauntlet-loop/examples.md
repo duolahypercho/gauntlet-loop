@@ -13,10 +13,11 @@ Harness verbs differ. Claude Code uses `/loop` + closing `ultracode`. Codex uses
 
 Internally (no paste-back to the user):
 
-1. Status line: `Gauntlet: FPS against Call of Duty in ThreeJS. Budget: until you stop. …`
-2. Write contract (`ARCHITECTURE.md` / `GAUNTLET.md`)
-3. Fan out builders → capture frames → fresh harsh critic → blind A/B → defects → loop
+1. Status line: `Gauntlet: FPS against Call of Duty in ThreeJS. Hard panel: … Budget: until you stop. …`
+2. Write contract (`ARCHITECTURE.md` / `GAUNTLET.md`) — **product subsystems only**
+3. Fan out **product** builders → cheapest glanceable frames → fresh harsh critic → matched blind A/B (hard panel owns tally) → product defects → loop
 4. Stop only on human / budget
+5. Never invent a capture/eval workstream; if a shot fails, simplify the shot and keep fixing the game
 
 ## Original (Call of Duty / ThreeJS) — Claude Code form
 
@@ -123,3 +124,24 @@ Fan out sub-agents.
 | Essay | a specific writer/piece | structure / voice | by reading aloud | Markdown |
 
 Rule: if the model can clearly beat `REFERENCE` on day one, pick a harder one.
+
+## Hard-panel defaults (tally owners)
+
+| Domain | `HARD_PANEL` (example) |
+|---|---|
+| FPS | late-fight frame: can you find the gunfight / player read in <1s vs real COD |
+| Roguelike | late-wave chaos: hero findable in <1s vs real reference still |
+| Marketing site | first viewport side-by-side vs live reference homepage |
+| Deck | title + problem slides vs the named deck, read aloud + glance |
+
+Easy checklist wins (HUD present, brand on a quiet frame) never flip the tally alone.
+
+## Anti-example (do not do this)
+
+Listing in the contract:
+
+```text
+| Capture / critic | tools/capture.py, tools/blind_compare.py | gameplay |
+```
+
+That turns the Gauntlet into a harness project. The pure prompt never does this. Capture stays a means; the product stays the loop body.
