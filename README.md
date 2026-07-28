@@ -1,33 +1,23 @@
 # Gauntlet Loop
 
-**Aim prompt as a runnable skill.** Brief → fan-out builders → separate harsh critic → blind side-by-side against an unreachable reference → keep improving until *you* stop it.
+**Matt Shumer's aim prompt as a slash command.** Fill the three paragraphs. Run them. Stop when *you* stop it.
 
-Works on **Claude Code** (`/gauntlet-loop`, `/loop`) and **Codex** (`$gauntlet-loop`, `/goal`). Same split as `AGENTS.md` + `CLAUDE.md`: shared core, harness overlays.
+No harness. No state machine. No helper scripts. Pure prompt.
+
+Works on **Claude Code** (`/gauntlet-loop`, `/loop`) and **Codex** (`$gauntlet-loop`, `/goal`).
 
 ```
 /gauntlet-loop a COD-style FPS in ThreeJS
 ```
 
-You do not paste a prompt. The agent *becomes* the orchestrator and runs the loop internally.
-
-## The shape
-
-Three jobs, one invoke:
-
-1. **Brief** — name a reference that already has the quality (never describe "good"); seed two workstream-sized examples; finish the list yourself
-2. **Orchestrator** — one worker per area; a *separate* harsh critic; fail → go again
-3. **Quality control** — blind A/B against the real reference; exit on the artifact, not step count
-
-The bar is deliberately unreachable. Quality is a function of runtime. **You are the brake.**
-
 ## Credit
 
-Built on **[Matt Shumer](https://x.com/mattshumer_)** (`@mattshumer_`) cooking the 152-word Call of Duty prompt — the one that one-shotted a browser FPS and kept climbing because its own critics never picked its frame over the real game.
+Built on **[Matt Shumer](https://x.com/mattshumer_)** (`@mattshumer_`) cooking the 152-word Call of Duty prompt.
 
-- **Original prompt + demo repo:** [github.com/mshumer/Claude-of-Duty](https://github.com/mshumer/Claude-of-Duty)
-- **This skill:** turns that loop into `/gauntlet-loop` (Claude) / `$gauntlet-loop` (Codex) so you don't have to babysit the paste
+- **Original prompt + demo:** [github.com/mshumer/Claude-of-Duty](https://github.com/mshumer/Claude-of-Duty)
+- **This skill:** same prompt, filled and executed on invoke — nothing bolted on
 
-He cooked the aim. This just makes the machine that keeps aiming.
+He cooked the aim. This just makes it one command.
 
 ## Install
 
@@ -37,45 +27,37 @@ cd gauntlet-loop
 ./install.sh
 ```
 
-Installs into:
+Installs into `~/.claude/skills/gauntlet-loop` + `/gauntlet-loop`, and symlinks Codex to the same skill.
 
-- `~/.claude/skills/gauntlet-loop` + `~/.claude/commands/gauntlet-loop.md`
-- `~/.codex/skills/gauntlet-loop` (symlink)
-
-Override Claude config dir with `CLAUDE_CONFIG_DIR=/path/to/.claude ./install.sh`.
-
-Restart Claude Code / Codex (or reload skills) after install.
-
-## Use it
+## Use
 
 ```text
-/gauntlet-loop
 /gauntlet-loop a COD-style FPS in ThreeJS
 /gauntlet-loop marketing site against Linear in Next.js
-/gauntlet-loop Hades-like roguelike in Godot, budget 4 hours
+$gauntlet-loop Hades-like roguelike in Godot
 ```
 
-Codex:
+The agent fills this shape and runs it (Claude verbs shown):
 
 ```text
-$gauntlet-loop a COD-style FPS in ThreeJS
+I want you to build [THING] at the level of [REFERENCE]. It should
+be utterly perfect, [LOOK], with every single thing done at
+[TIER] quality, from [AREA_1] to [AREA_2] to anything you could think of.
+
+Fan out sub-agents and have sub-agents tackle each one individually so that the [THING]
+is utterly perfect. You should /loop on each item and have a separate sub-agent check it
+[CHECK] to ensure it is [TIER]. That separate sub-agent should
+be a really harsh critic, and if it isn't [TIER], it should keep going.
+
+Don't stop until each sub-agent is utterly wowed with the quality when compared with
+[REFERENCE]. It should literally compare them side by side blind and say which
+one looks better. Do this in [STACK]. /loop until it's utterly perfect.
+Fan out sub-agents and ultracode.
 ```
 
-Or just say "Gauntlet Loop …" in natural language.
+Say **"compose only"** if you just want the filled text without the run.
 
-On invoke the agent:
-
-1. Infers nouns (thing / reference / stack / budget / hard panel) — one clarifying question max
-2. Writes a short contract (`ARCHITECTURE.md` / `GAUNTLET.md`) — **product subsystems only**
-3. Fans out **product** builders; grabs the cheapest glanceable frames
-4. Spawns a **fresh** harsh critic with no builder memory
-5. Runs **matched** blind A/B against the real reference (hard panel owns the tally)
-6. Turns **product** defects into the next round
-7. Keeps going until you stop it or the budget hits
-
-**The loop body is always the product.** Capture is disposable. The skill forbids promoting capture/eval tooling into a workstream — that is how long runs leave the pure prompt and start optimizing harness FPS instead of the game.
-
-Say **"compose only"** if you just want the filled three-paragraph prompt without the run.
+**You are the brake.** The loop will not finish on its own.
 
 ## Layout
 
@@ -84,27 +66,14 @@ gauntlet-loop/
 ├── README.md
 ├── LICENSE
 ├── install.sh
-├── commands/
-│   └── gauntlet-loop.md          # Claude Code slash command
-└── skills/
-    └── gauntlet-loop/
-        ├── SKILL.md              # boot + harness detect
-        ├── AGENTS.md             # shared core (any agent)
-        ├── CLAUDE.md             # Claude overlay (/loop, ultracode)
-        ├── CODEX.md              # Codex overlay (/goal)
-        └── examples.md           # fills + noun defaults
+├── commands/gauntlet-loop.md
+└── skills/gauntlet-loop/
+    ├── SKILL.md      # boot
+    ├── AGENTS.md     # the prompt + what not to invent
+    ├── CLAUDE.md     # /loop + ultracode
+    ├── CODEX.md      # /goal
+    └── examples.md   # filled prompts
 ```
-
-## Rules the skill will not break
-
-- Name quality; never describe it
-- Separate harsh critic; builder never self-grades
-- Blind forced choice against a real reference (matched sheets only)
-- Hard panel owns the tally — easy checklist wins do not flip `candidate`
-- Unreachable bar stays unreachable (no "stop after N flat rounds")
-- Human + budget is the only stop
-- Product is the loop body — never a capture/harness workstream
-- One fan-out → critic cycle is never "done"; continue in the same turn
 
 ## License
 

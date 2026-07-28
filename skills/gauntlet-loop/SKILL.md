@@ -1,76 +1,40 @@
 ---
 name: gauntlet-loop
 description: >-
-  Run a full Gauntlet Loop internally on invoke — brief, fan-out builders,
-  separate harsh critic, blind side-by-side against an unreachable reference,
-  keep improving until the human stops it. Works on Claude Code (/gauntlet-loop,
-  /loop) and Codex ($gauntlet-loop, /goal). Use when the user says /gauntlet-loop,
-  Gauntlet Loop, aim prompt, one-prompt build, or wants a long-running
-  build-against-a-named-reference loop without babysitting.
+  Run Matt Shumer's aim prompt as-is — fill the three paragraphs, execute them,
+  fan-out + harsh critic + blind A/B against a named reference until the human
+  stops you. No harness, no state machine, no helper scripts. Claude
+  (/gauntlet-loop, /loop) and Codex ($gauntlet-loop, /goal). Use for Gauntlet
+  Loop, aim prompt, one-prompt build, COD-style loop.
 argument-hint: "[what to build] [optional: against REFERENCE] [optional: in STACK]"
 ---
 
 # Gauntlet Loop
 
-**On invoke: do the work. Do not hand the user a prompt to paste.**
+**Pure prompt. No functions.**
 
-`/gauntlet-loop` (Claude) or `$gauntlet-loop` (Codex) means: you become the
-orchestrator. Compose the aim internally, fan out builders, run a separate harsh
-critic, blind A/B against the reference, and keep looping until the human stops
-you or the budget hits. The three-paragraph prompt is your internal operating
-procedure — not something you ask them to run.
+On invoke: fill the three-paragraph aim prompt, then **run it**. Do not paste it
+for the user. Do not build a capture suite, a state file protocol, or a scoring
+framework around it. The prompt *is* the method.
 
-**The loop body is always the product.** Capture is disposable. Never promote
-harness/eval tooling into a workstream. Hard panel owns the A/B tally. See
-AGENTS.md ("Why the pure prompt works").
-
-Works on **Claude Code** and **Codex**, same split as vault `AGENTS.md` + `CLAUDE.md`.
-
-## Boot sequence (do this first, then start)
-
-1. Read [AGENTS.md](AGENTS.md) — shared rules + internal execution loop.
-2. Detect harness, then read the matching overlay:
-   - **Claude Code** → [CLAUDE.md](CLAUDE.md)
-   - **Codex** → [CODEX.md](CODEX.md)
-3. Parse `$ARGUMENTS` / the user message for `THING`, `REFERENCE`, `STACK`, `BUDGET`.
-4. Infer everything else. Ask **at most one** clarifying question, and only if
-   `THING` is missing. Then start. Do not wait for a second confirmation.
-
-## Quick detect hints
-
-| Signal | Harness |
-|---|---|
-| `/gauntlet-loop`, `/loop`, `ultracode`, Claude Code, Opus | Claude |
-| `$gauntlet-loop`, `/goal`, Codex, `codex` | Codex |
-| Skill loaded from `~/.claude/skills/` | Claude |
-| Skill loaded from `~/.codex/skills/` | Codex |
-
-## Invoke shapes
+1. Read [AGENTS.md](AGENTS.md) — the prompt + what not to invent.
+2. Read the harness overlay for loop verbs only:
+   - **Claude Code** → [CLAUDE.md](CLAUDE.md) (`/loop`, `ultracode`)
+   - **Codex** → [CODEX.md](CODEX.md) (`/goal`)
+3. Infer nouns from `$ARGUMENTS` / the message. One question max if `THING` is missing.
+4. Fill → execute → keep going until the human stops you.
 
 ```text
-/gauntlet-loop
 /gauntlet-loop a COD-style FPS in ThreeJS
 /gauntlet-loop marketing site against Linear in Next.js
-/gauntlet-loop Hades-like roguelike in Godot, budget 4 hours
 ```
-
-Bare `/gauntlet-loop` with no args: infer from cwd / open files / recent chat.
-If still empty, ask once: "What are we building?" Then go.
 
 ## Do not
 
-- Dump the three-paragraph prompt and stop — **you run it**
-- Ask for every blank — infer; one question max
+- Dump the prompt and stop — **you run it**
+- Invent tools, harnesses, contracts, or round machinery
+- Soften the critic / lower the reference / invent a stop condition
+- End after one cycle and ask whether to continue
 - Mix harness verbs (`/loop` on Codex, `/goal` on Claude, `ultracode` on Codex)
-- Invent a stop condition; the human + budget is the brake
-- Soften the critic or lower the reference so the loop can "finish"
-- **End the turn after one fan-out → critic cycle** — that is the #1 failure mode. Start the next round in the same turn. See AGENTS.md §7 Continuation contract.
-- **Spend rounds on capture/harness instead of the product** — that is the #2 failure mode. See AGENTS.md §3 + core rules 10–14.
-- Flip `last_ab_winner` to candidate from easy-panel majority or mismatched sheets
 
-## Additional resources
-
-- Shared core: [AGENTS.md](AGENTS.md)
-- Claude overlay: [CLAUDE.md](CLAUDE.md)
-- Codex overlay: [CODEX.md](CODEX.md)
-- Worked fills / noun defaults: [examples.md](examples.md)
+Fills: [examples.md](examples.md)
