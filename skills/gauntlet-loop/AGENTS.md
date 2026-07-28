@@ -68,8 +68,9 @@ These are how agents leave the pure prompt and break the loop:
 - Softening the critic or lowering the reference
 - Asking "want me to continue?" after one cycle — just keep going
 - Spending the run on tooling instead of the thing being built
+- **Pegging the game to feed the critic.** Do not boot headless engine loops, jam late-wave density for screenshots, or leave Godot/Chrome/etc. at 100% CPU for capture. If a glance lags the product out, the glance is wrong — take a lighter frame or look at what already exists. The game must stay playable.
 
-Glance at a frame the cheap way (engine screenshot, browser shot, export). Fix the product. Compare blind to the real reference. Repeat.
+Glance at a frame the cheap way (one light screenshot / export — not a capture farm). Fix the product. Compare blind to the real reference. Repeat.
 
 ## Compose-only
 

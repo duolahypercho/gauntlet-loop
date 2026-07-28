@@ -36,5 +36,6 @@ framework around it. The prompt *is* the method.
 - Soften the critic / lower the reference / invent a stop condition
 - End after one cycle and ask whether to continue
 - Mix harness verbs (`/loop` on Codex, `/goal` on Claude, `ultracode` on Codex)
+- Lag the product out with capture farms / headless engine spam — the game stays playable
 
 Fills: [examples.md](examples.md)
